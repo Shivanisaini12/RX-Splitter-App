@@ -1,6 +1,7 @@
 
 	<a href="https://front.codes/" class="logo" target="_blank">
-		<img src="https://assets.codepen.io/1462889/fcy.png" alt="">
+		<img alt="" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP4dDWdtHqNMiYTmGB2dJrazlJMMG2zs_FDw&amp;usqp=CAU">
+		<!-- <img src="https://assets.codepen.io/1462889/fcy.png" alt=""> -->
 	</a>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -16,43 +17,74 @@
 			          	<label for="reg-log"></label>
 						<div class="card-3d-wrap mx-auto">
 							<div class="card-3d-wrapper">
-								<div class="card-front">
+							<div class="card-front">
+								<form  [formGroup]="loginForm" (ngSubmit)="loginSubmitted()">
 									<div class="center-wrap">
 										<div class="section text-center">
 											<h4 class="mb-4 pb-3">Log In</h4>
 											<div class="form-group">
-                                               
-												<input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
+												<input type="email" class="form-style" placeholder="Your Email" id="email" autocomplete="off" formControlName="email"/>
+
+												<div class="form-text text-danger" *ngIf="email.errors?.['required'] 
+												&& (email.touched || email.dirty)">Email name is required!</div>
+												<div class="form-text text-danger" *ngIf="email.errors?.['email']
+												&& (email.touched || email.dirty)">Email is not valid!</div>
 												<i class="input-icon uil uil-at fa fa-id-card"></i>
 											</div>	
 											<div class="form-group mt-2">
-												<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
+												<input type="password" class="form-style" placeholder="Your Password" id="password" formControlName="password" autocomplete="off"/>
+
+												<div class="form-text text-danger" *ngIf="password.errors?.['required'] 
+												&& (password.touched || password.dirty)">Password is required!</div>
+												<div class="form-text text-danger" *ngIf="password.errors?.['minlength'] || password.errors?.['maxlength'] 
+												&& (password.touched || password.dirty)">Password should be at least 8 digit at the max 15 characters long!</div>
 												<i class="input-icon uil uil-lock-alt fa fa-lock"></i>
 											</div>
-											<a href="#" class="btn mt-4">submit</a>
+											<button type="submit" [disabled]="loginForm.invalid" class="btn mt-4">Login</button>
+										
                             				<p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your password?</a></p>
 				      					</div>
 			      					</div>
-			      				</div>
+								</form>
+			      			</div>
 								<div class="card-back">
+									<form [formGroup]="registerForm" (ngSubmit)="registeredSubmit()">
 									<div class="center-wrap">
 										<div class="section text-center">
 											<h4 class="mb-4 pb-3">Sign Up</h4>
 											<div class="form-group">
-												<input type="text" name="logname" class="form-style" placeholder="Your Full Name" id="logname" autocomplete="off">
+												<input formControlName="fullName" type="text" class="form-style"  placeholder="Your Full Name" id="fullName" autocomplete="off"/>
+
+												<div class="form-text text-danger" *ngIf="fullName.errors?.['required'] 
+												&& (fullName.touched || fullName.dirty)">First name is required!</div>
+												<div class="form-text text-danger" *ngIf="fullName.errors?.['minlength']
+												&& (fullName.touched || fullName.dirty)">First name is too short!</div>
+												<div class="form-text text-danger" *ngIf="fullName.errors?.['pattern']
+												&& (fullName.touched || fullName.dirty)">First name should start with alphabet!</div>
 												<i class="input-icon uil uil-user fa fa-user"></i>
 											</div>	
 											<div class="form-group mt-2">
-												<input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
+												<input formControlName="EmailId" type="email"  class="form-style" placeholder="Your Email"  id="EmailId" autocomplete="off"/>
+									
+												<div class="form-text text-danger" *ngIf="EmailId.errors?.['required'] 
+												&& (EmailId.touched || EmailId.dirty)">EmailId name is required!</div>
+												<div class="form-text text-danger" *ngIf="EmailId.errors?.['EmailId']
+												&& (EmailId.touched || EmailId.dirty)">EmailId is not valid!</div>
 												<i class="input-icon uil uil-at fa fa-id-card"></i>
 											</div>	
 											<div class="form-group mt-2">
-												<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
+												<input formControlName="Password" type="password" class="form-style" placeholder="Your Password" id="Password" autocomplete="off"/>
+											
+												<div class="form-text text-danger" *ngIf="Password.errors?.['required'] 
+												&& (Password.touched || Password.dirty)">Password is required!</div>
+												<div class="form-text text-danger" *ngIf="Password.errors?.['minlength'] || Password.errors?.['maxlength'] 
+												&& (Password.touched || Password.dirty)">Password should be at least 8 digit at the max 15 characters long!</div>
 												<i class="input-icon uil uil-lock-alt fa fa-lock"></i>
 											</div>
 											<a href="#" class="btn mt-4">submit</a>
 				      					</div>
 			      					</div>
+									</form>
 			      				</div>
 			      			</div>
 			      		</div>
